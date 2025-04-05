@@ -1,0 +1,49 @@
+{% extends 'myapp/base.html' %}
+{% block title %} Pofile {% endblock title %}
+{% load custom_filters %}
+{% block content %}
+<div class="container">
+   <div class="mt-3">
+    <h3>Hello {{request.user}}</h3>
+   <a href="{% url 'changepass1' %}">change password with old password</a>
+   <br>
+   <a href="{% url 'changepass2' %}">change password without old password</a>
+   <br>
+   <a href="{% url 'updateprofile' %}">Update Profile</a>
+   </div>
+   <div class="mt-3">
+        <div class="table-responsive">
+         <table class="table">
+            <tr>
+               <th>ID</th>
+               <th>USER NAME</th>
+               <th>FIRST NAME</th>
+               <th>LAST NAME</th>
+               <th>EMAIL</th>
+               <th>CITY</th>
+               <th>PHONE</th>
+               <th>LAST LOGIN</th>
+               <th>PROFILE PIC</th>
+            </tr>
+            <tr>
+               <td>{{user.id}}</td>
+               <td>{{user.username}}</td>
+               <td>{{user.first_name}}</td>
+               <td>{{user.last_name}}</td>
+               <td>{{user.email}}</td>
+               <td>{{user.city}}</td>
+               <td>{{user.phone}}</td>
+               <td>{{user.last_login}}</td>
+               <td>
+                  {% if user.profile_pic.url %}
+                     <img src="{{user.profile_pic.url}}" style="width: 100px;" class="rounded">
+                  {% else %}
+                     <img src="https://picsum.photos/seed/picsum/200/300" style="width: 100px;" class="rounded">
+                  {% endif %}
+               </td>
+            </tr>
+           </table>
+        </div>
+   </div>
+</div>
+{% endblock content %}
